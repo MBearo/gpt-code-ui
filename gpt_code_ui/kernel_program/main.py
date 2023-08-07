@@ -18,9 +18,9 @@ from flask_cors import CORS  # Import the CORS library
 from dotenv import load_dotenv
 load_dotenv('.env')
 
-import gpt_code_ui.kernel_program.kernel_manager as kernel_manager
-import gpt_code_ui.kernel_program.config as config
-import gpt_code_ui.kernel_program.utils as utils
+import kernel_program.kernel_manager as kernel_manager
+import kernel_program.config as config
+import kernel_program.utils as utils
 
 
 APP_PORT = int(os.environ.get("API_PORT", 5010))
@@ -77,7 +77,7 @@ async def start_snakemq():
             if message["value"] == "ready":
                 logger.debug("Kernel is ready.")
                 result_queue.put({
-                    "value":"Kernel is ready.",
+                    "value":"内核准备完成.",
                     "type": "message"
                 })
 

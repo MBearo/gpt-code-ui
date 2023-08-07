@@ -15,7 +15,7 @@ export type MessageDict = {
 function App() {
   const COMMANDS = ["reset"];
 
-  let [MODELS, setModels] = useState([{displayName: "GPT-3.5", name: "gpt-3.5-turbo"}]);
+  const [MODELS, setModels] = useState([{displayName: "GPT-3.5", name: "gpt-3.5-turbo"}]);
 
   useEffect(() => {
     const getModels = async () => {
@@ -25,34 +25,34 @@ function App() {
         setModels(json);
       } catch (e) {
         console.error(e);
-      };
+      }
     };
 
     getModels();
  }, []);
 
-  let [selectedModel, setSelectedModel] = useLocalStorage<string>(
+  const [selectedModel, setSelectedModel] = useLocalStorage<string>(
     "model",
     MODELS[0].name
   );
 
-  let [openAIKey, setOpenAIKey] = useLocalStorage<string>("OpenAIKey", "");
+  const [openAIKey, setOpenAIKey] = useLocalStorage<string>("OpenAIKey", "");
 
-  let [messages, setMessages] = useState<Array<MessageDict>>(
+  const [messages, setMessages] = useState<Array<MessageDict>>(
     Array.from([
       {
-        text: "Hello! I'm a GPT Code assistant. Ask me to do something for you! Pro tip: you can upload a file and I'll be able to use it.",
+        text: "你好！我是一个代码助手。你可以上传一个文件，我能够使用它。请告诉我你想做什么！",
         role: "generator",
         type: "message",
       },
       {
-        text: "If I get stuck just type 'reset' and I'll restart the kernel.",
+        text: "如果遇到问题，输入'reset'，将刷新内核。",
         role: "generator",
         type: "message",
       },
     ])
   );
-  let [waitingForSystem, setWaitingForSystem] = useState<WaitingStates>(
+  const [waitingForSystem, setWaitingForSystem] = useState<WaitingStates>(
     WaitingStates.Idle
   );
   const chatScrollRef = React.useRef<HTMLDivElement>(null);
@@ -127,7 +127,7 @@ function App() {
         return;
       }
       
-      if (!!code) {
+      if (code) {
         submitCode(code);
         setWaitingForSystem(WaitingStates.RunningCode);
       } else {
@@ -146,8 +146,8 @@ function App() {
       return;
     }
     
-    let response = await fetch(`${Config.API_ADDRESS}/api`);
-    let data = await response.json();
+    const response = await fetch(`${Config.API_ADDRESS}/api`);
+    const data = await response.json();
     data.results.forEach(function (result: {value: string, type: string}) {
       if (result.value.trim().length == 0) {
         return;
@@ -194,7 +194,7 @@ function App() {
   // Capture <a> clicks for download links
   React.useEffect(() => {
     const clickHandler = (event: any) => {
-      let element = event.target;
+      const element = event.target;
       
       // If an <a> element was found, prevent default action and do something else
       if (element != null && element.tagName === 'A') {

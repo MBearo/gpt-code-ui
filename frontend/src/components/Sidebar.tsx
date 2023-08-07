@@ -19,13 +19,13 @@ export default function Sidebar(props: {
     <>
       <div className="sidebar">
         <div className="logo">
-            <AssistantIcon /> GPT-Code UI
+            Code Interepreter
 
             <div className='github'>
-                <a href='https://github.com/ricklamers/gpt-code-ui'>Open Source - v{import.meta.env.VITE_APP_VERSION}</a>
+                <a>代码解释器</a>
             </div>
         </div>
-        <div className="settings">
+        <div className="settings" style={{display:'none'}}>
             <label className="header">Settings</label>
             <label>Model</label>
             <select

@@ -8,9 +8,9 @@ import "./Input.css";
 
 export default function Input(props: { onSendMessage: any, onStartUpload: any, onCompletedUpload: any }) {
 
-  let fileInputRef = useRef<HTMLInputElement>(null);
-  let [inputIsFocused, setInputIsFocused] = useState<boolean>(false);
-  let [userInput, setUserInput] = useState<string>("");
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const [inputIsFocused, setInputIsFocused] = useState<boolean>(false);
+  const [userInput, setUserInput] = useState<string>("");
 
   const handleInputFocus = () => {
     setInputIsFocused(true);
@@ -94,7 +94,7 @@ export default function Input(props: { onSendMessage: any, onStartUpload: any, o
           onKeyDown={handleKeyDown}
           value={userInput}
           rows={1}
-          placeholder="Send a message"
+          placeholder="发送消息"
         />
         <button className="send" onClick={handleSendMessage}>
           <SendIcon />

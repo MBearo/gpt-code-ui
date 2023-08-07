@@ -11,8 +11,8 @@ import webbrowser
 
 from multiprocessing import Process
 
-from gpt_code_ui.webapp.main import app, APP_PORT
-from gpt_code_ui.kernel_program.main import main as kernel_program_main, cleanup_kernel_program
+from webapp.main import app, APP_PORT
+from kernel_program.main import main as kernel_program_main, cleanup_kernel_program
 
 APP_URL = "http://localhost:%s" % APP_PORT
 
@@ -57,13 +57,13 @@ def print_banner():
 █▄█ █▀▀ ░█░ ░░ █▄▄ █▄█ █▄▀ ██▄
         """)
 
-        print("> Open GPT-Code UI in your browser %s" % APP_URL)
-        print("")
+        print("> Open Code Interepreter in your browser %s" % APP_URL)
+        print("？？？")
         print("You can inspect detailed logs in app.log.")
         print("")
         print("Find your OpenAI API key at https://platform.openai.com/account/api-keys")
         print("")
-        print_color("Contribute to GPT-Code UI at https://github.com/ricklamers/gpt-code-ui")   
+        print_color("Contribute to Code Interepreter at https://github.com/ricklamers/gpt-code-ui")   
 
 def main():
     setup_logging()

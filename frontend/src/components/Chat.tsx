@@ -17,14 +17,14 @@ function Message(props: {
   type: string;
   showLoader?: boolean;
 }) {
-  let { text, role } = props;
+  const { text, role } = props;
 
   const isMarkdown = (input: string) => {
     const mdRegex = /\[.*\]\(.*\)|\*\*.*\*\*|__.*__|\#.*|\!\[.*\]\(.*\)|`.*`|\- .*|\|.*\|/g;
     return mdRegex.test(input);
   };
 
-  let ICONS = {
+  const ICONS = {
     "upload": <FileUploadIcon />,
     "generator":  <VoiceChatIcon />,
     "system": <TerminalIcon />,
@@ -94,9 +94,9 @@ function Message(props: {
 
 
 export enum WaitingStates {
-  GeneratingCode = "Generating code",
-  RunningCode = "Running code",
-  UploadingFile = "Uploading file",
+  GeneratingCode = "生成代码",
+  RunningCode = "运行代码",
+  UploadingFile = "上传文件中",
   Idle = "Idle",
 }
 
