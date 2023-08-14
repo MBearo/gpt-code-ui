@@ -16,4 +16,5 @@
   flex: 1;
   overflow: hidden;
   height: 100vh;
+  background: linear-gradient(180deg,#f5f4f6,#e6ebf7);
 }

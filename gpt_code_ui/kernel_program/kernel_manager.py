@@ -15,9 +15,10 @@ from jupyter_client import BlockingKernelClient
 
 from dotenv import load_dotenv
 load_dotenv('.env')
-
-import kernel_program.utils as utils
-import kernel_program.config as config
+import sys
+sys.path.append('/Users/mbear/bearspace/gpt-code-ui')
+import gpt_code_ui.kernel_program.utils as utils
+import gpt_code_ui.kernel_program.config as config
 
 # Set up globals
 messaging = None

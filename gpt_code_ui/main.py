@@ -12,7 +12,9 @@ import webbrowser
 from multiprocessing import Process
 
 from webapp.main import app, APP_PORT
-from kernel_program.main import main as kernel_program_main, cleanup_kernel_program
+import sys
+sys.path.append('/Users/mbear/bearspace/gpt-code-ui')
+from gpt_code_ui.kernel_program.main import main as kernel_program_main, cleanup_kernel_program
 
 APP_URL = "http://localhost:%s" % APP_PORT
 

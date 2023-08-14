@@ -14,8 +14,9 @@ from collections import deque
 from flask_cors import CORS
 from flask import Flask, request, jsonify, send_from_directory, Response
 from dotenv import load_dotenv
-
-from kernel_program.main import APP_PORT as KERNEL_APP_PORT
+import sys
+sys.path.append('/Users/mbear/bearspace/gpt-code-ui')
+from gpt_code_ui.kernel_program.main import APP_PORT as KERNEL_APP_PORT
 
 load_dotenv('.env')
 
@@ -94,35 +95,34 @@ def inspect_file(filename: str) -> str:
 
 async def get_code(user_prompt, user_openai_key=None, model="gpt-3.5-turbo"):
 
-    prompt = f"""首先，这是我之前要求你完成的任务的历史记录： 
-    实际提示如下：
+    prompt = f"""First, here is a history of what I asked you to do earlier. 
+    The actual prompt follows after ENDOFHISTORY. 
+    History:
     {message_buffer.get_string()}
-    请使用三个反引号的Markdown代码块编写以下Python代码，完成以下任务：
+    ENDOFHISTORY.
+    Write Python code, in a triple backtick Markdown code block, that does the following:
     {user_prompt}
-
-    请注意：
-
-    -  在处理之前，请逐步思考要做什么并用英语写下来。
-    -  然后，在代码块中生成有效的Python代码。
-    -  确保所有代码有效，可以在Jupyter Python 3内核环境中运行。
-    -  在使用变量之前，请先定义它。
-    -  对于数据转换，您可以使用以下库：
-        - 'numpy'  # numpy==1.24.3
-        - 'dateparser'  # dateparser==1.1.8
-        - 'pandas'  # pandas==1.5.3
-        - 'geopandas'  # geopandas==0.13.2
-    -  对于PDF提取，您可以使用以下库：
-        - 'PyPDF2'  # PyPDF2==3.0.1
-        - 'pdfminer'  # pdfminer==20191125
-        - 'pdfplumber'  # pdfplumber==0.9.0
-    -  对于数据可视化，您可以使用以下库：
-        - 'matplotlib'  # matplotlib==3.7.1
-
-    请确保使用matplotlib生成图表。如果需要地理图表，请使用geopandas和geopandas.datasets模块。
-
-    如果用户刚刚上传了一个文件，请关注最近上传的文件（以及可选地关注之前上传的所有文件）。
-
-    如果代码修改或生成了一个文件，在代码块的末尾插入一个打印语句，以将其作为HTML字符串打印为链接：<a href='/download?file=INSERT_FILENAME_HERE'>Download file</a>。将INSERT_FILENAME_HERE替换为实际的文件名。"""
+    
+    Notes: 
+        First, think step by step what you want to do and write it down in English.
+        Then generate valid Python code in a code block 
+        Make sure all code is valid - it be run in a Jupyter Python 3 kernel environment. 
+        Define every variable before you use it.
+        For data munging, you can use 
+            'numpy', # numpy==1.24.3
+            'dateparser' #dateparser==1.1.8
+            'pandas', # matplotlib==1.5.3
+            'geopandas' # geopandas==0.13.2
+        For pdf extraction, you can use
+            'PyPDF2', # PyPDF2==3.0.1
+            'pdfminer', # pdfminer==20191125
+            'pdfplumber', # pdfplumber==0.9.0
+        For data visualization, you can use
+            'matplotlib', # matplotlib==3.7.1
+        Be sure to generate charts with matplotlib. If you need geographical charts, use geopandas with the geopandas.datasets module.
+        If the user has just uploaded a file, focus on the file that was most recently uploaded (and optionally all previously uploaded files)
+    
+    Teacher mode: if the code modifies or produces a file, at the end of the code block insert a print statement that prints a link to it as HTML string: <a href='/download?file=INSERT_FILENAME_HERE'>Download file</a>. Replace INSERT_FILENAME_HERE with the actual filename."""
 
     if user_openai_key:
         openai.api_key = user_openai_key

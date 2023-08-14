@@ -64,3 +64,7 @@ Please do and have a look at the [contributions guide](.github/CONTRIBUTING.md)!
 
 
 Thank you for your interest in this project!
+
+
+
+VITE_WEB_ADDRESS=http://localhost:8080 npm run dev
